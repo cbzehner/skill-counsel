@@ -1,12 +1,10 @@
 ---
 name: counsel
 description: >-
-  Route thinking and second-opinion workflows. Use when the user wants to be
-  grilled, interviewed, pushed on a plan, get adversarial critique, run a
-  premortem, ask other models, compare approaches, or find one radically useful
-  addition. This is an additive canonical router over grill-me,
-  critical-thinking, magi, and innovate; do not edit or replace those old skills
-  yet.
+  Route thinking and second-opinion workflows. Use when the user wants
+  conversational interrogation, adversarial critique, premortem analysis,
+  external model counsel, comparison of approaches, or a high-leverage novel
+  addition to an already coherent plan.
 argument-hint: "[--interview|--adversarial|--panel|--wildcard] [question or plan]"
 arguments:
   - request
@@ -19,16 +17,14 @@ allowed-tools: Bash Read Glob Grep Task Write
 
 Pick exactly one mode first. Load only that reference file, then follow its workflow.
 
-This skill is a shadow router. It reduces the future trigger surface, but the old skills remain the known-good implementations.
-
 ## Routing
 
 | Intent | Mode | Load |
 |---|---|---|
-| "grill me", "interview me", "ask me questions", clarify a draft by conversation | `--interview` | [references/interview.md](references/interview.md) |
-| "poke holes", "be honest", "what could go wrong", premortem, verdict on reasoning | `--adversarial` | [references/adversarial.md](references/adversarial.md) |
-| "ask other models", "magi", "second opinion", compare approaches with external counsel | `--panel` | [references/panel.md](references/panel.md) |
-| "innovate", "what am I missing", "single smartest addition", creative frontier push | `--wildcard` | [references/wildcard.md](references/wildcard.md) |
+| Clarify a draft, decision, or plan through conversation | `--interview` | [references/interview.md](references/interview.md) |
+| Evaluate reasoning, surface failure modes, or give a direct verdict | `--adversarial` | [references/adversarial.md](references/adversarial.md) |
+| Bring in external model counsel for a decision worth the latency | `--panel` | [references/panel.md](references/panel.md) |
+| Add one high-leverage novel idea to an already coherent plan | `--wildcard` | [references/wildcard.md](references/wildcard.md) |
 
 ## Boundaries
 
