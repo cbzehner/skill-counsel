@@ -1,0 +1,24 @@
+{
+  "name": "counsel",
+  "version": "0.1.0",
+  "description": "Router skill for interview, adversarial critique, multi-model council, and frontier wildcard thinking.",
+  "author": {
+    "name": "cbzehner",
+    "email": "chris@cbzehner.com",
+    "url": "https://github.com/cbzehner"
+  },
+  "homepage": "https://github.com/cbzehner/skill-counsel",
+  "repository": "https://github.com/cbzehner/skill-counsel",
+  "license": "MIT",
+  "keywords": ["counsel", "review", "magi", "critical-thinking", "interview", "innovation"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Counsel",
+    "shortDescription": "Router for thinking and second-opinion workflows.",
+    "longDescription": "Routes requests to interview, adversarial critique, panel review, or wildcard innovation modes while preserving old guidance as references.",
+    "developerName": "cbzehner",
+    "category": "Reasoning",
+    "capabilities": ["Reasoning", "Review"],
+    "websiteURL": "https://github.com/cbzehner/skill-counsel"
+  }
+}

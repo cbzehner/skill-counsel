@@ -1,0 +1,11 @@
+{
+  "name": "counsel",
+  "description": "Router skill for interview, adversarial critique, multi-model council, and frontier wildcard thinking.",
+  "version": "0.1.0",
+  "author": {
+    "name": "cbzehner",
+    "email": "chris@cbzehner.com"
+  },
+  "repository": "https://github.com/cbzehner/skill-counsel",
+  "license": "MIT"
+}
