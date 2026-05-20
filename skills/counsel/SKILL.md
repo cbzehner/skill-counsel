@@ -37,6 +37,13 @@ This skill is a shadow router. It reduces the future trigger surface, but the ol
 - Panel mode is for decisions worth external latency; do not use it for trivial questions.
 - Wildcard mode is for plans that are already coherent; do not use it to rescue vague requirements.
 
+## Handoffs
+
+- If the user needs a durable PRD, issue, or implementation plan, route to `plan`.
+- If repo/product terminology is fuzzy or conflicts with code/docs, route to `domain-model audit`.
+- If the user needs findings against a concrete diff, artifact, screenshot, or release candidate, route to `review`.
+- If a question uncovers an unexplained failure, route to `diagnose`.
+
 ## Output
 
 End with a short mode-specific result:
