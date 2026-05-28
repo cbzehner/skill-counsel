@@ -1,8 +1,10 @@
 # Counsel Skill
 
-Additive router for thinking workflows.
+Router for thinking and second-opinion workflows.
 
-This skill does not replace the existing `grill-me`, `critical-thinking`, `magi`, or `innovate` repos yet. It gives us one canonical entry point to test while the old skills remain available.
+Counsel is the canonical entry point for the older `grill-me`,
+`critical-thinking`, `magi`, and `innovate` workflows. Use `--panel` for the
+multi-model council behavior that previously lived in `magi`.
 
 ## Modes
 
@@ -17,3 +19,10 @@ This skill does not replace the existing `grill-me`, `critical-thinking`, `magi`
 ln -sfn ~/Developer/Personal/skill-counsel/skills/counsel ~/.claude/skills/counsel
 ln -sfn ~/Developer/Personal/skill-counsel/skills/counsel ~/.codex/skills/counsel
 ```
+
+## Notes
+
+- `--panel` calls Gemini directly and checks `~/.gemini/.env` for
+  `GEMINI_API_KEY` when non-interactive auth fails.
+- Codex still uses an adapter when available because that transport avoids
+  stdin hangs in subagent environments.

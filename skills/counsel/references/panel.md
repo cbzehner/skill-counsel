@@ -50,7 +50,9 @@ Start with the host-native local advisor, then add external advisors.
 
 **Never double-count the host** — the host runtime IS the local advisor. Don't launch its own CLI as a second advisor.
 
-See [reference.md](reference.md) for provider CLI details, setup, and failure modes.
+If the standalone `magi` skill is installed, prefer handing off to it for the
+full panel workflow. This counsel reference is a lightweight fallback and must
+not depend on files outside this skill directory.
 
 ### Step 1.5: Gather Context (~4000 token budget)
 
@@ -67,16 +69,18 @@ Excerpt relevant sections, not whole files. Never include secrets/credentials. B
 
 **Prompt safety:** Never interpolate prompts into shell strings. Always use single-quoted heredocs (`<<'PROMPT'`) to prevent shell expansion.
 
-**Gemini transport:** Always use [gemini-query.sh](gemini-query.sh) instead of calling `gemini` directly (centralizes model selection, prevents model-name drift in long contexts):
+**Gemini transport:** Call Gemini directly. Keep the model explicit in the command so the invocation is self-contained:
 
 ```bash
-bash gemini-query.sh "$(cat <<'PROMPT'
+gemini -p "$(cat <<'PROMPT'
 [advisor prompt with any characters safely]
 PROMPT
-)"
+)" --model gemini-3.1-pro-preview --sandbox -o json
 ```
 
-**Codex transport:** Always use [codex-adapter.sh](codex-adapter.sh) instead of `codex exec` directly (prevents stdin pipe hangs in subagent environments).
+If Gemini reports a missing API key, check `~/.gemini/.env` first. Non-interactive `gemini -p` expects `GEMINI_API_KEY` there; do not print or persist the key in session notes.
+
+**Codex transport:** Prefer a local `codex-adapter.sh` when available because it prevents stdin hangs in subagent environments. If this counsel skill was installed without the adapter, use direct `codex exec ... < /dev/null` as a fallback and note that the adapter was unavailable.
 
 **On Claude Code:** Run as a single background Agent (general-purpose, opus) that:
 1. Queries Gemini and Codex in parallel via Bash (heredocs for prompt safety)
@@ -115,7 +119,9 @@ Statuses: `ok` (usable), `unavailable` (not configured), `blocked` (policy denie
 
 ### Step 3.5: Critique Round (--debate only)
 
-When `--debate` is passed, run anonymized cross-critique before synthesis. See [critique-round.md](critique-round.md) for the full protocol. Skip entirely without `--debate`.
+When `--debate` is passed and the standalone `magi` skill is available, hand off
+there for the full anonymized critique protocol. Otherwise skip the critique
+round and state that this fallback panel only ran the first-pass advisors.
 
 ### Step 4: Synthesize
 
@@ -130,7 +136,7 @@ On conflicts, use normalized fields: incompatible assumptions often explain disa
 
 Answer explicitly: (1) agreement, (2) disagreement, (3) which disagreements matter, (4) best decision for project context, (5) remaining uncertainty.
 
-See [reference.md](reference.md) for the report template.
+Use the persistence template below for the report.
 
 ### Step 5: Persist Session
 
@@ -167,15 +173,15 @@ Always use `## Synthesis`, `## Claude`, `## Gemini`, `## Codex` headers (grep an
 |---|---|---|
 | Permission denied | **STOP** — show setup guidance | Magi's value is multi-perspective. Single-advisor fallback is just a normal conversation |
 | 429 / capacity | Wait 60s → retry → proceed without | Gemini has limited capacity |
-| Auth / missing API key | Show setup instructions per [reference.md](reference.md) | |
-| CLI not found | Show install instructions per [reference.md](reference.md) | |
+| Auth / missing API key | For Gemini, check `~/.gemini/.env` for `GEMINI_API_KEY`; for other CLIs, ask the user to authenticate outside the agent session | |
+| CLI not found | State the missing CLI and proceed only if at least two advisors remain | |
 | Network error | Retry once, then mark unavailable | |
 
 **Degraded council rules:**
 - 3/3 → full synthesis
 - 2/3 → partial synthesis, note who's missing and why
 - 1/3 (host-only) → only if failures are capacity/network; state it's single-advisor
-- Permission blocked → **STOP**. Show setup message: add `"Bash(bash gemini-query.sh *)"` and `"Bash(codex *)"` to `.claude/settings.local.json` permissions.allow. (Codex hosts: show sandbox/approval guidance instead.)
+- Permission blocked → **STOP**. Show setup message: add `"Bash(gemini *)"` and `"Bash(codex *)"` to `.claude/settings.local.json` permissions.allow. (Codex hosts: show sandbox/approval guidance instead.)
 
 ## Usage Examples
 
@@ -190,5 +196,4 @@ Usage:
 
 ## References
 
-- Provider CLIs, normalization, and report template: [reference.md](reference.md)
-- Anonymized critique protocol: [critique-round.md](critique-round.md)
+- Full panel workflow, provider reference, and critique protocol live in the standalone `magi` skill when installed.
