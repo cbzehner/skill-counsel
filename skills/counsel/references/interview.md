@@ -1,6 +1,6 @@
 ---
-name: grill-me
-description: Interview the user one question at a time about an existing plan or design, walking down each branch of the decision tree. Use when user says "grill me", "interview me", "push back on me", "ask me questions", or wants the assistant to probe their reasoning conversationally. Distinct from superpowers:brainstorming (starts from intent, not a draft) and critical-thinking (delivers a verdict via analysis — grill-me asks questions instead of analyzing). Do NOT use for premortem, failure-mode analysis, or stress-testing claims — those are critical-thinking.
+name: counsel-interview
+description: Interview the user one question at a time about an existing plan or design, walking down each branch of the decision tree. Use when user says "grill me", "interview me", "push back on me", "ask me questions", or wants the assistant to probe their reasoning conversationally. Distinct from `counsel --adversarial`, which gives a verdict; interview mode asks questions instead of analyzing. Do NOT use for premortem, failure-mode analysis, or stress-testing claims — those are `counsel --adversarial`.
 license: MIT
 effort: low
 allowed-tools: Read Glob Grep
@@ -9,15 +9,15 @@ metadata:
   upstream: "https://github.com/mattpocock/skills/tree/main/grill-me"
 ---
 
-# /grill-me
+# Counsel Interview
 
 Interview the user relentlessly about every aspect of an existing plan or design until you reach shared understanding. Walk down each branch of the decision tree, resolving dependencies between decisions one at a time.
 
 ## When NOT to Use
 
-- **Exploring requirements from scratch** → use `superpowers:brainstorming`. Brainstorming starts from intent. grill-me starts from a draft.
-- **Multi-perspective external counsel** → use `magi`. magi gathers parallel opinions; grill-me drives a focused single-thread interview.
-- **Verdict on whether a plan is good** → use `critical-thinking` Adversarial Assessment mode. critical-thinking gives the verdict; grill-me uncovers blind spots.
+- **Exploring requirements from scratch** → use `plan --interview`. Planning starts from intent; this mode starts from a draft.
+- **Multi-perspective external counsel** → use `counsel --panel` (`magi` alias). Panel mode gathers parallel opinions; interview mode drives a focused single-thread conversation.
+- **Verdict on whether a plan is good** → use `counsel --adversarial`. Adversarial mode gives the verdict; interview mode uncovers blind spots.
 
 ## How
 

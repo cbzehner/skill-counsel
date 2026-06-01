@@ -1,5 +1,5 @@
 ---
-name: magi
+name: counsel-panel
 description: >-
   Multi-AI counsel system that queries Gemini, Codex, and Claude advisors in
   parallel, then synthesizes the answers. Use for second opinions, multiple
@@ -17,13 +17,13 @@ allowed-tools: Bash Read Glob Grep Task Write
 # Note: Write is scoped to session persistence (~/.claude/magi/sessions/) only
 ---
 
-# Magi
+# Counsel Panel
 
 ## When NOT to Use
 
-- Trivial questions where you already know the answer — magi adds 30-60s latency
+- Trivial questions where you already know the answer — panel mode adds 30-60s latency
 - Time-sensitive execution where the user wants action, not counsel
-- Solo deep reasoning — use critical-thinking instead
+- Solo deep reasoning — use `counsel --adversarial` instead
 
 ## Modes
 
@@ -50,9 +50,8 @@ Start with the host-native local advisor, then add external advisors.
 
 **Never double-count the host** — the host runtime IS the local advisor. Don't launch its own CLI as a second advisor.
 
-If the standalone `magi` skill is installed, prefer handing off to it for the
-full panel workflow. This counsel reference is a lightweight fallback and must
-not depend on files outside this skill directory.
+This is the canonical panel implementation. `magi` is only an alias for this
+workflow; do not hand off to the archived `skill-magi` repository.
 
 ### Step 1.5: Gather Context (~4000 token budget)
 
@@ -119,9 +118,9 @@ Statuses: `ok` (usable), `unavailable` (not configured), `blocked` (policy denie
 
 ### Step 3.5: Critique Round (--debate only)
 
-When `--debate` is passed and the standalone `magi` skill is available, hand off
-there for the full anonymized critique protocol. Otherwise skip the critique
-round and state that this fallback panel only ran the first-pass advisors.
+When `--debate` is passed, run an anonymized critique round if the local
+provider tools are available. Otherwise skip the critique round and state that
+panel mode only ran the first-pass advisors.
 
 ### Step 4: Synthesize
 
@@ -144,7 +143,7 @@ Write to `~/.claude/magi/sessions/YYYY-MM-DD-<slug>.md` (create dir if needed).
 Slug: first ~50 chars of question, lowercased, spaces to hyphens, non-alphanumeric removed. Include file path in report.
 
 ```markdown
-# Magi Session: YYYY-MM-DD
+# Counsel Panel Session: YYYY-MM-DD
 **Question**: [original prompt verbatim]
 **Advisors**: claude (ok), gemini (ok), codex (failed)
 **Decision**: [optional — concrete choice, if one emerged]
@@ -171,7 +170,7 @@ Always use `## Synthesis`, `## Claude`, `## Gemini`, `## Codex` headers (grep an
 
 | Error Type | Action | Why |
 |---|---|---|
-| Permission denied | **STOP** — show setup guidance | Magi's value is multi-perspective. Single-advisor fallback is just a normal conversation |
+| Permission denied | **STOP** — show setup guidance | Panel mode's value is multi-perspective. Single-advisor fallback is just a normal conversation |
 | 429 / capacity | Wait 60s → retry → proceed without | Gemini has limited capacity |
 | Auth / missing API key | For Gemini, check `~/.gemini/.env` for `GEMINI_API_KEY`; for other CLIs, ask the user to authenticate outside the agent session | |
 | CLI not found | State the missing CLI and proceed only if at least two advisors remain | |
@@ -189,11 +188,11 @@ When `$ARGUMENTS` is empty, show:
 
 ```
 Usage:
-  /magi "prompt"                     # Counsel mode (default)
-  /magi --debate "prompt"            # Add anonymized critique round
-  /magi "Plan A vs Plan B"           # Plan synthesis mode
+  counsel --panel "prompt"           # Panel mode
+  magi "prompt"                      # Alias for counsel --panel
+  magi --debate "prompt"             # Alias with anonymized critique round
 ```
 
 ## References
 
-- Full panel workflow, provider reference, and critique protocol live in the standalone `magi` skill when installed.
+- `magi` remains an alias for this panel workflow.

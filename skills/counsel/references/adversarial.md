@@ -1,12 +1,13 @@
 ---
-name: critical-thinking
+name: counsel-adversarial
 description: >
   Apply rigorous reasoning to a question, design, or claim. Use when user says "think harder",
   "poke holes", "stress-test", "be honest", "what could go wrong", "premortem", "what's wrong
   with this", "find flaws", "what am I missing in the reasoning", or wants steelmanning,
   devil's-advocate review, failure-mode analysis, bias check, tradeoff analysis, assumption
-  surfacing, or argument evaluation. Built on the Paul-Elder framework. Use magi instead for
-  multi-perspective external counsel from Gemini/Codex.
+  surfacing, or argument evaluation. Built on the Paul-Elder framework. Use
+  `counsel --panel` (`magi` alias) instead for multi-perspective external
+  counsel from Gemini/Codex.
 license: MIT
 effort: high
 metadata:

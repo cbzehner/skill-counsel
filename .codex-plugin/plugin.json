@@ -1,7 +1,7 @@
 {
   "name": "counsel",
   "version": "1.0.0",
-  "description": "Route thinking and second-opinion workflows. Use when the user wants conversational interrogation, adversarial critique, premortem analysis, external model counsel, comparison of approaches, or a high-leverage novel addition to an already coherent plan.",
+  "description": "Route thinking and second-opinion workflows. Includes interviews, adversarial critique, model panels, wildcard ideas, and a magi alias for counsel --panel.",
   "author": {
     "name": "cbzehner",
     "url": "https://github.com/cbzehner"
@@ -16,8 +16,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Counsel",
-    "shortDescription": "Route thinking and second-opinion workflows. Use when the user wants conversational interrogation, adversarial critiq...",
-    "longDescription": "Route thinking and second-opinion workflows. Use when the user wants conversational interrogation, adversarial critique, premortem analysis, external model counsel, comparison of approaches, or a high-leverage novel addition to an already coherent plan.",
+    "shortDescription": "Route thinking and second-opinion workflows, including a magi alias.",
+    "longDescription": "Route thinking and second-opinion workflows. Includes interviews, adversarial critique, model panels, wildcard ideas, and a magi alias for counsel --panel.",
     "developerName": "cbzehner",
     "category": "Reasoning",
     "capabilities": [

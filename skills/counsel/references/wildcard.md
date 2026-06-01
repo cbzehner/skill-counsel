@@ -1,5 +1,5 @@
 ---
-name: innovate
+name: counsel-wildcard
 description: Queries frontier models in parallel for the single highest-leverage
   addition to a plan or project. Use when brainstorming, seeking creative push,
   or asking "what am I missing?"
@@ -59,8 +59,8 @@ Use AskUserQuestion:
 
 ## Examples
 
-`/innovate PLAN.md` — reads plan, queries three advisors, synthesizes one recommended addition with next steps.
+`counsel --wildcard PLAN.md` — reads plan, queries advisors when useful, and synthesizes one recommended addition with next steps.
 
-`/innovate` in a project directory — reads README + src/, proposes one high-leverage addition.
+`counsel --wildcard` in a project directory — reads README + src/, proposes one high-leverage addition.
 
 Anti-trigger: "Fix this OAuth bug" — this is debugging, not ideation. Do not activate.

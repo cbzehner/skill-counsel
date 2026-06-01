@@ -1,12 +1,13 @@
 # Counsel
 
-Route second-opinion work. The skill supports interviews, adversarial critique, premortems, model panels, and wildcard additions to plans that already mostly make sense.
+Route second-opinion work. The skill supports interviews, adversarial critique, premortems, model panels, and wildcard additions to plans that already mostly make sense. `magi` is kept as an alias for `counsel --panel`.
 
 ## Use It For
 
 - Stress-testing a plan before implementation
 - Comparing approaches with a sharper outside view
 - Finding one useful angle that the current plan missed
+- Running `magi` as a familiar alias for the panel workflow
 
 ## Install
 
@@ -26,11 +27,11 @@ Install targets:
 - `./install.sh opencode` installs to `~/.config/opencode/skills/counsel`
 - `./install.sh all --copy` copies files instead of symlinking
 
-Manual install works too: symlink or copy `skills/counsel` into your agent's skills directory.
+Manual install works too: symlink or copy `skills/counsel` into your agent's skills directory. To keep the `magi` alias, also symlink or copy `skills/magi`.
 
 ## Agent Support
 
-This repo uses the plain `skills/counsel/SKILL.md` layout. Claude Code and Codex also get small plugin manifests at `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json`.
+This repo uses the plain `skills/counsel/SKILL.md` layout, plus `skills/magi/SKILL.md` as a tiny alias. Claude Code and Codex also get small plugin manifests at `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json`.
 
 Other agents can read the same `SKILL.md` file. If a host does not support a frontmatter field or tool name, ignore that field and follow the workflow text.
 
@@ -41,6 +42,7 @@ Other agents can read the same `SKILL.md` file. If a host does not support a fro
 .codex-plugin/plugin.json
 install.sh
 skills/counsel/SKILL.md
+skills/magi/SKILL.md
 README.md
 LICENSE
 ```
