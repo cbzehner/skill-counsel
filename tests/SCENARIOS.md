@@ -2,14 +2,14 @@
 
 Use these fixtures when changing routing, aliases, or panel behavior.
 
-## Scenario 1: Magi Alias
+## Scenario 1: Magi Keyword
 
 Prompt: `magi: should we use plan A or plan B?`
 
 Pass criteria:
 
 - Routes to `counsel --panel`.
-- Does not ask the user to install or unarchive `skill-magi`.
+- Does not load, install, link, or unarchive `skill-magi`.
 - Builds a multi-advisor prompt or reports which provider tools are unavailable.
 - Produces a synthesis, not three disconnected opinions.
 
@@ -45,4 +45,3 @@ Pass criteria:
 - Suggests one high-leverage addition, not a brainstorm list.
 - Names the smallest next step.
 - Does not use wildcard mode to rescue vague requirements.
-

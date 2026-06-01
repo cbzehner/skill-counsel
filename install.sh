@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Install this repository's skills into common agent skill directories.
+# Install this repository's skill into common agent skill directories.
 # Usage:
 #   ./install.sh                 # install to Claude, Codex, and generic agents
 #   ./install.sh claude          # ~/.claude/skills
@@ -12,10 +12,8 @@ set -euo pipefail
 #   ./install.sh all --force     # replace an existing non-symlink destination
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SKILL_DIRS=()
-while IFS= read -r skill_dir; do
-  SKILL_DIRS+=("$skill_dir")
-done < <(find "$REPO_DIR/skills" -mindepth 1 -maxdepth 1 -type d | sort)
+SKILL_DIR="$(find "$REPO_DIR/skills" -mindepth 1 -maxdepth 1 -type d | sort | head -n 1)"
+SKILL_NAME="$(basename "$SKILL_DIR")"
 
 TARGET="all"
 MODE="symlink"
@@ -41,10 +39,7 @@ esac
 
 install_one() {
   local dest_dir="$1"
-  local skill_dir="$2"
-  local skill_name
-  skill_name="$(basename "$skill_dir")"
-  local target="$dest_dir/$skill_name"
+  local target="$dest_dir/$SKILL_NAME"
   mkdir -p "$dest_dir"
 
   if [ -e "$target" ] || [ -L "$target" ]; then
@@ -57,15 +52,13 @@ install_one() {
   fi
 
   if [ "$MODE" = "copy" ]; then
-    cp -R "$skill_dir" "$target"
+    cp -R "$SKILL_DIR" "$target"
   else
-    ln -s "$skill_dir" "$target"
+    ln -s "$SKILL_DIR" "$target"
   fi
-  echo "installed $skill_name -> $target ($MODE)"
+  echo "installed $SKILL_NAME -> $target ($MODE)"
 }
 
 for dest in "${DESTS[@]}"; do
-  for skill_dir in "${SKILL_DIRS[@]}"; do
-    install_one "$dest" "$skill_dir"
-  done
+  install_one "$dest"
 done

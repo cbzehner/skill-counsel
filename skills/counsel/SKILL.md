@@ -32,7 +32,7 @@ Pick exactly one mode first. Load only that reference file, then follow its work
 - Interview mode asks one question at a time; it does not give a verdict.
 - Adversarial mode gives a verdict; it does not interview unless a blocking ambiguity prevents analysis.
 - Panel mode is for decisions worth external latency; do not use it for trivial questions.
-- `magi` is an alias for panel mode, not a separate active implementation. Use `counsel --panel`.
+- `magi` is trigger vocabulary for panel mode, not a separate active skill. Use `counsel --panel`.
 - Wildcard mode is for plans that are already coherent; do not use it to rescue vague requirements.
 
 ## Handoffs
