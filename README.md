@@ -1,18 +1,16 @@
 # Counsel
 
-Route thinking and second-opinion workflows. Use when the user wants conversational interrogation, adversarial critique, premortem analysis, external model counsel, comparison of approaches, or a high-leverage novel addition to an already coherent plan.
+Route second-opinion work. The skill supports interviews, adversarial critique, premortems, model panels, and wildcard additions to plans that already mostly make sense.
 
-## Skill
+## Use It For
 
-This repository packages one portable agent skill:
-
-- `counsel` - Route thinking and second-opinion workflows. Use when the user wants conversational interrogation, adversarial critique, premortem analysis, external model counsel, comparison of approaches, or a high-leverage novel addition to an already coherent plan.
-
-The canonical skill body lives at `skills/counsel/SKILL.md`. Keep behavior changes there; keep this README focused on installation and packaging.
+- Stress-testing a plan before implementation
+- Comparing approaches with a sharper outside view
+- Finding one useful angle that the current plan missed
 
 ## Install
 
-Clone the repository, then run the installer:
+Clone the repo and run the installer:
 
 ```bash
 git clone https://github.com/cbzehner/skill-counsel.git
@@ -22,38 +20,34 @@ cd skill-counsel
 
 Install targets:
 
-- `./install.sh claude` -> `~/.claude/skills/counsel`
-- `./install.sh codex` -> `~/.codex/skills/counsel`
-- `./install.sh agents` -> `~/.agents/skills/counsel` for generic agent harnesses such as Pi/Hermes-style setups
-- `./install.sh opencode` -> `~/.config/opencode/skills/counsel`
+- `./install.sh claude` installs to `~/.claude/skills/counsel`
+- `./install.sh codex` installs to `~/.codex/skills/counsel`
+- `./install.sh agents` installs to `~/.agents/skills/counsel`
+- `./install.sh opencode` installs to `~/.config/opencode/skills/counsel`
 - `./install.sh all --copy` copies files instead of symlinking
 
-Manual installation is just a symlink or copy from `skills/counsel` into your agent's skills directory.
+Manual install works too: symlink or copy `skills/counsel` into your agent's skills directory.
 
-## Compatibility
+## Agent Support
 
-This repo uses the common `skills/<name>/SKILL.md` layout so agents that understand file-based skills can load it directly. Host-specific metadata is included where useful:
+This repo uses the plain `skills/counsel/SKILL.md` layout. Claude Code and Codex also get small plugin manifests at `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json`.
 
-- Claude Code: `.claude-plugin/plugin.json` and direct `~/.claude/skills` install
-- Codex CLI: `.codex-plugin/plugin.json` with `skills: "./skills/"` and direct `~/.codex/skills` install
-- Other agents: direct install to the agent's skills directory; unsupported frontmatter fields can be ignored
+Other agents can read the same `SKILL.md` file. If a host does not support a frontmatter field or tool name, ignore that field and follow the workflow text.
 
-Some skills mention optional host tools such as `Task`, `Agent`, `Skill`, MCP tools, or browser automation CLIs. On hosts that do not provide those tools, adapt to equivalent local capabilities and keep the same workflow intent.
-
-## Public Safety
-
-These repositories are public. Do not commit organization-specific instructions, private repository names, secrets, tokens, cookies, raw session logs, customer data, or machine-local paths. Use environment variables and generic paths in examples.
-
-## Repository Layout
+## Layout
 
 ```text
-.claude-plugin/plugin.json   # Claude plugin metadata
-.codex-plugin/plugin.json    # Codex plugin metadata
-install.sh                   # Symlink/copy installer for common agent skill dirs
+.claude-plugin/plugin.json
+.codex-plugin/plugin.json
+install.sh
 skills/counsel/SKILL.md
 README.md
 LICENSE
 ```
+
+## Public Notes
+
+These repos are public. Keep private repo names, secrets, customer data, raw logs, cookies, and absolute filesystem paths out of examples.
 
 ## License
 
