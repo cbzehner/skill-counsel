@@ -1,10 +1,10 @@
 {
   "name": "counsel",
-  "description": "Router skill for interview, adversarial critique, multi-model council, and frontier wildcard thinking.",
-  "version": "0.1.0",
+  "description": "Route thinking and second-opinion workflows. Use when the user wants conversational interrogation, adversarial critique, premortem analysis, external model counsel, comparison of approaches, or a high-leverage novel addition to an already coherent plan.",
+  "version": "1.0.0",
   "author": {
     "name": "cbzehner",
-    "email": "chris@cbzehner.com"
+    "url": "https://github.com/cbzehner"
   },
   "repository": "https://github.com/cbzehner/skill-counsel",
   "license": "MIT"
