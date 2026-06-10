@@ -1,3 +1,5 @@
+> **Moved:** this skill now lives in [cbzehner/skills](https://github.com/cbzehner/skills) under `skills/counsel/`. This repo is archived and read-only.
+
 # Counsel
 
 Route second-opinion work. The skill supports interviews, adversarial critique, premortems, model panels, and wildcard additions to plans that already mostly make sense. `magi` is treated as a keyword for `counsel --panel`.
